@@ -1,0 +1,38 @@
+[
+  {
+    "name": "menu:dashboard callback replies with dashboard info",
+    "steps": [
+      {
+        "send": { "callback": "menu:dashboard" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "sendMessage", "payload": { "text": "Dashboard: Your bot assistant overview." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "menu:settings callback replies with settings info",
+    "steps": [
+      {
+        "send": { "callback": "menu:settings" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "sendMessage", "payload": { "text": "Settings: Configure your bot preferences." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "menu:help callback replies with help info",
+    "steps": [
+      {
+        "send": { "callback": "menu:help" },
+        "expect": [
+          { "method": "answerCallbackQuery" },
+          { "method": "sendMessage", "payload": { "text": "Help: Use /menu to navigate, /echo to repeat text." } }
+        ]
+      }
+    ]
+  }
+]
