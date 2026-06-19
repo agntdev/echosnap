@@ -1,0 +1,49 @@
+[
+  {
+    "name": "/start still works after removal of /ping and /help",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Hi — I'm EchoSnap. Send /echo <text> and I'll repeat it back to you."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/echo still works after removal of /ping and /help",
+    "steps": [
+      {
+        "send": { "text": "/echo hello world" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "hello world" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/ping no longer replies (extraneous command removed)",
+    "strict": true,
+    "steps": [
+      {
+        "send": { "text": "/ping" },
+        "expect": []
+      }
+    ]
+  },
+  {
+    "name": "/help no longer replies (extraneous command removed)",
+    "strict": true,
+    "steps": [
+      {
+        "send": { "text": "/help" },
+        "expect": []
+      }
+    ]
+  }
+]
