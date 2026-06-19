@@ -5,7 +5,7 @@ import { inlineKeyboard, inlineButton } from "../toolkit/index.js";
 
 const composer = new Composer<BotContext<Session>>();
 
-composer.command("start", async (ctx) => {
+composer.command("menu", async (ctx) => {
   await ctx.reply("Welcome! I am your bot assistant. Use the menu below to navigate:", {
     reply_markup: inlineKeyboard([
       [inlineButton("📊 Dashboard", "menu:dashboard")],
