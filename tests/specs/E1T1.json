@@ -1,0 +1,46 @@
+[
+  {
+    "name": "/echo with no argument shows usage",
+    "steps": [
+      {
+        "send": { "text": "/echo" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Usage: /echo <text>" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/echo replies with provided text",
+    "steps": [
+      {
+        "send": { "text": "/echo hello world" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "hello world" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/echo trims leading whitespace",
+    "steps": [
+      {
+        "send": { "text": "/echo   leading spaces" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "leading spaces" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/echo preserves trailing whitespace",
+    "steps": [
+      {
+        "send": { "text": "/echo trailing spaces   " },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "trailing spaces   " } }
+        ]
+      }
+    ]
+  }
+]
