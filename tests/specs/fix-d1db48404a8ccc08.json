@@ -1,0 +1,57 @@
+[
+  {
+    "name": "/parse with valid number returns the numeric value",
+    "steps": [
+      {
+        "send": { "text": "/parse 42" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "42" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/parse with no argument shows usage",
+    "steps": [
+      {
+        "send": { "text": "/parse" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Usage: /parse <number>" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/parse with non-numeric input triggers error reply",
+    "steps": [
+      {
+        "send": { "text": "/parse abc" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "An internal error occurred." } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/parse with negative number works",
+    "steps": [
+      {
+        "send": { "text": "/parse -3.14" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "-3.14" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/parse with whitespace trims input",
+    "steps": [
+      {
+        "send": { "text": "/parse   100  " },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "100" } }
+        ]
+      }
+    ]
+  }
+]
