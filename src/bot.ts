@@ -1,26 +1,35 @@
-import { createBot } from "./toolkit/index.js";
+import { Composer } from "grammy";
+import { readdir } from "node:fs/promises";
+import { dirname, join } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { createBot, type BotContext } from "./toolkit/index.js";
 
-// The per-chat session shape (ephemeral conversation state only). Extend as the
-// bot grows. Durable domain data must NOT live here — use the toolkit's
-// persistent storage (see AGENTS.md).
 export interface Session {
-  // example: step?: "awaiting_amount";
 }
 
-/**
- * buildBot — assembles the bot and registers every handler, but does NOT start
- * it. Shared by the runtime entry (src/index.ts) and the Tests-gate harness
- * (src/harness-entry.ts) so both exercise the exact same bot. Add new commands
- * and flows here.
- */
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const handlersDir = join(__dirname, "handlers");
+
+const composers: Composer<BotContext<Session>>[] = [];
+
+const entries = await readdir(handlersDir);
+for (const file of entries) {
+  if (!file.endsWith(".js")) continue;
+  const url = pathToFileURL(join(handlersDir, file)).href;
+  const mod = await import(url);
+  if (mod.default instanceof Composer) {
+    composers.push(mod.default);
+  }
+}
+
 export function buildBot(token: string) {
   const bot = createBot<Session>(token, {
     initial: () => ({}),
   });
 
-  bot.command("start", async (ctx) => {
-    await ctx.reply("Welcome! I am ready to help.");
-  });
+  for (const composer of composers) {
+    bot.use(composer);
+  }
 
   return bot;
 }
