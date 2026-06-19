@@ -1,0 +1,46 @@
+[
+  {
+    "name": "/div with two numbers returns the quotient",
+    "steps": [
+      {
+        "send": { "text": "/div 10 2" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "10 / 2 = 5" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/div with no arguments shows usage",
+    "steps": [
+      {
+        "send": { "text": "/div" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Usage: /div <a> <b>" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/div division by zero triggers error reply",
+    "steps": [
+      {
+        "send": { "text": "/div 10 0" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Division by zero is undefined" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/div with non-numeric input triggers error reply",
+    "steps": [
+      {
+        "send": { "text": "/div a b" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Please provide two numbers. Usage: /div <a> <b>" } }
+        ]
+      }
+    ]
+  }
+]
