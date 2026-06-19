@@ -1,0 +1,25 @@
+[
+  {
+    "name": "/start sends welcome and main menu",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Welcome! I am your bot assistant. Use the menu below to navigate:",
+              "reply_markup": {
+                "inline_keyboard": [
+                  [{ "text": "📊 Dashboard", "callback_data": "menu:dashboard" }],
+                  [{ "text": "⚙️ Settings", "callback_data": "menu:settings" }],
+                  [{ "text": "ℹ️ Help", "callback_data": "menu:help" }]
+                ]
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+]
