@@ -1,9 +1,9 @@
 [
   {
-    "name": "/start sends welcome and main menu",
+    "name": "/menu sends main menu",
     "steps": [
       {
-        "send": { "text": "/start" },
+        "send": { "text": "/menu" },
         "expect": [
           {
             "method": "sendMessage",
