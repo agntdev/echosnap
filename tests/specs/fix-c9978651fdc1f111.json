@@ -1,0 +1,46 @@
+[
+  {
+    "name": "/echo with no argument shows usage",
+    "steps": [
+      {
+        "send": { "text": "/echo" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Usage: /echo <text>" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/echo with single space shows usage (no empty reply)",
+    "steps": [
+      {
+        "send": { "text": "/echo " },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Usage: /echo <text>" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/echo with only spaces shows usage (no empty reply)",
+    "steps": [
+      {
+        "send": { "text": "/echo   " },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "Usage: /echo <text>" } }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "/echo replies with provided text",
+    "steps": [
+      {
+        "send": { "text": "/echo hello world" },
+        "expect": [
+          { "method": "sendMessage", "payload": { "text": "hello world" } }
+        ]
+      }
+    ]
+  }
+]
